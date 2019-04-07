@@ -268,6 +268,131 @@ def movie_details(movie_id):
       "vote_count": 12475
     }
 
+    lego_details = {
+        "adult": False,
+        "backdrop_path": "/wPRiV4TVpRCV2es81q0S1eRaUbm.jpg",
+        "belongs_to_collection": {
+            "id": 325470,
+            "name": "The Lego Movie Collection",
+            "poster_path": "/qwuwukEjuh6Zs51NnhtPVriARey.jpg",
+            "backdrop_path": "/sQNiamRBTh2aTjQ8aYCJ69MngTM.jpg"
+        },
+        "budget": 60000000,
+        "genres": [
+            {
+                "id": 12,
+                "name": "Adventure"
+            },
+            {
+                "id": 16,
+                "name": "Animation"
+            },
+            {
+                "id": 35,
+                "name": "Comedy"
+            },
+            {
+                "id": 10751,
+                "name": "Family"
+            },
+            {
+                "id": 14,
+                "name": "Fantasy"
+            }
+        ],
+        "homepage": "http://www.thelegomovie.com",
+        "id": 137106,
+        "imdb_id": "tt1490017",
+        "original_language": "en",
+        "original_title": "The Lego Movie",
+        "overview": "An ordinary Lego mini-figure, mistakenly thought to be the extraordinary MasterBuilder, is recruited to join a quest to stop an evil Lego tyrant from gluing the universe together.",
+        "popularity": 14.334,
+        "poster_path": "/lMHbadNmznKs5vgBAkHxKGHulOa.jpg",
+        "production_companies": [
+            {
+                "id": 2723,
+                "logo_path": None,
+                "name": "Lin Pictures",
+                "origin_country": "US"
+            },
+            {
+                "id": 79,
+                "logo_path": "/tpFpsqbleCzEE2p5EgvUq6ozfCA.png",
+                "name": "Village Roadshow Pictures",
+                "origin_country": "US"
+            },
+            {
+                "id": 429,
+                "logo_path": "/2Tc1P3Ac8M479naPp1kYT3izLS5.png",
+                "name": "DC Comics",
+                "origin_country": "US"
+            },
+            {
+                "id": 2785,
+                "logo_path": "/l5zW8jjmQOCx2dFmvnmbYmqoBmL.png",
+                "name": "Warner Bros. Animation",
+                "origin_country": "US"
+            },
+            {
+                "id": 4081,
+                "logo_path": "/9Q0SyrhQD61wWbz5KJOkL6tu2mg.png",
+                "name": "LEGO",
+                "origin_country": "DK"
+            },
+            {
+                "id": 8089,
+                "logo_path": "/kEUAzsG2hZcCV7rmSCozgLhGWaa.png",
+                "name": "Animal Logic",
+                "origin_country": "AU"
+            },
+            {
+                "id": 25120,
+                "logo_path": "/lqUpBvDLQYG3QaKNpe2lxfpgh36.png",
+                "name": "Warner Animation Group",
+                "origin_country": "US"
+            },
+            {
+                "id": 41624,
+                "logo_path": "/wzKxIeQKlMP0y5CaAw25MD6EQmf.png",
+                "name": "RatPac-Dune Entertainment",
+                "origin_country": "US"
+            },
+            {
+                "id": 829,
+                "logo_path": "/mzpAmEQ5P1gFvdRoNyCk9q8ngiv.png",
+                "name": "Vertigo Entertainment",
+                "origin_country": "US"
+            },
+            {
+                "id": 174,
+                "logo_path": "/ky0xOc5OrhzkZ1N6KyUxacfQsCk.png",
+                "name": "Warner Bros. Pictures",
+                "origin_country": "US"
+            }
+        ],
+        "production_countries": [
+            {
+                "iso_3166_1": "US",
+                "name": "United States of America"
+            }
+        ],
+        "release_date": "2014-02-06",
+        "revenue": 469160692,
+        "runtime": 100,
+        "spoken_languages": [
+            {
+                "iso_639_1": "en",
+                "name": "English"
+            }
+        ],
+        "status": "Released",
+        "tagline": "The story of a nobody who saved everybody.",
+        "title": "The Lego Movie",
+        "video": False,
+        "vote_average": 7.4,
+        "vote_count": 4690
+    }
+
     spiderverse_details = {
       "adult": False,
       "backdrop_path": "/uUiId6cG32JSRI6RyBQSvQtLjz2.jpg",
@@ -374,10 +499,13 @@ def movie_details(movie_id):
     }
 
     my_dict = {
-        BR2049_MOVIE_ID : br2049_details,
+        BLADE_RUNNER_2049_MOVIE_ID : br2049_details,
         LOGAN_MOVIE_ID : logan_details,
         INFINITY_WAR_MOVIE_ID : infinity_war_details,
-        SPIDERVERSE_MOVIE_ID : spiderverse_details
+        SPIDERVERSE_MOVIE_ID : spiderverse_details,
+        LEGO_MOVIE_ID : lego_details
     }
 
     return my_dict[movie_id] if movie_id in my_dict else None
+
+movie_details(1)
