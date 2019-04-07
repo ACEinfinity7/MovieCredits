@@ -1,7 +1,7 @@
 from movie_ids import *
 
 def movie_details(movie_id):
-    br2049_details = {
+    blade_runner_2049_details = {
       "adult": False,
       "backdrop_path": "/sAtoMqDVhNDQBc3QJL3RF6hlhGq.jpg",
       "belongs_to_collection": {
@@ -499,7 +499,7 @@ def movie_details(movie_id):
     }
 
     my_dict = {
-        BLADE_RUNNER_2049_MOVIE_ID : br2049_details,
+        BLADE_RUNNER_2049_MOVIE_ID : blade_runner_2049_details,
         LOGAN_MOVIE_ID : logan_details,
         INFINITY_WAR_MOVIE_ID : infinity_war_details,
         SPIDERVERSE_MOVIE_ID : spiderverse_details,
