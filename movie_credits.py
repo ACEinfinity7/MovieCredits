@@ -19064,5 +19064,3 @@ def movie_credits(movie_id):
     }
 
     return my_dict[movie_id] if movie_id in my_dict else None
-
-movie_credits(1)
