@@ -33,11 +33,11 @@ def basic_output(filename):
         for id_base in id_list:
             movie = movie_details(id_base)
             out_file.write('\n')
-            out_file.write(f'{movie["title"]}, \
-                             {movie["id"]}, \
-                             {movie["release_date"]}, \
-                             ${movie["budget"]}, \
-                             {movie["runtime"]} min, \
+            out_file.write(f'{movie["title"]},\
+                             {movie["id"]},\
+                             {movie["release_date"]},\
+                             ${movie["budget"]},\
+                             {movie["runtime"]} min,\
                              ${movie["revenue"]}')
 
 
@@ -76,11 +76,14 @@ def pick_actors(filename, num_of_actors):
     with open(filename, 'w') as actor_out:
         actor_out.write('Name, Id, Movie Id, Character')
         for curr in range(len(act_sample)):
+            curr_name = unidecode(act_sample[curr]["name"])
+            curr_id = act_sample[curr]["id"]
+            curr_movie_id = current_movie_credit["id"]
+            curr_character = unidecode(act_sample[curr]["character"])
             actor_out.write('\n')
-            actor_out.write(unidecode(f'{act_sample[curr]["name"]}, \
-                                        {act_sample[curr]["id"]}, \
-                                        {current_movie_credit["id"]}, \
-                                        {act_sample[curr]["character"]}'))
+            actor_out.write \
+            (f'{curr_name}, {curr_id}, {curr_movie_id}, {curr_character}')
+
 
 
 
@@ -95,6 +98,7 @@ pick_actors(filename, num_of_actors)
 
 #B.1 out put directors: name, id, movie id: with an & between them
 def output_directors(filename):
+    counter = 0
     output_dict = dict()
     for movie_orig in id_list:
         movie = movie_credits(movie_orig)
@@ -102,21 +106,24 @@ def output_directors(filename):
             if movie['crew'][curr]['job'] == 'Director':
                 curr_name = unidecode(movie['crew'][curr]['name'])
                 if curr_name in output_dict:
-                    output_dict[curr_name][2] = output_dict[curr_name][2][].append('second')
+                    output_dict[curr_name][2].append(movie_orig)
                 else:
-                    key_director_id = movie['crew'][curr]['id']
-                    key_director_movie_id = movie_orig
-                    output_dict[curr_name] = [curr_name, \
+                    output_dict[curr_name] = (curr_name, \
                                              movie['crew'][curr]['id'], \
-                                             [movie_orig]]
+                                             [movie_orig])
+
 
     with open(filename, 'w') as f:
         f.write('Director Name, Director Id, Movie Id')
         for key in output_dict:
             f.write('\n')
-            f.write(f'{output_dict[key][0]}, \
-                      {output_dict[key][1]}, \
-                      {output_dict[key][2]}')
+            f.write(f'{output_dict[key][0]}, {output_dict[key][1]}, ')
+            for i in output_dict[key][2]:
+                f.write(f'{i}')
+                counter += 1
+                if counter < len(output_dict[key][2]) and counter > 0:
+                    f.write(" & ")
+            counter = 0
 
 
 
@@ -126,24 +133,37 @@ output_directors(filename)
 
 
 
+
 #C.1 Actor Name, Actor Id, list of movie names
-def output_actors():
+def output_actors(filename):
+    counter = 0
     output_dict = dict()
     for movie_orig in id_list:
         movie = movie_credits(movie_orig)
         for curr in range(len(movie['cast'])):
-            if unidecode(movie['cast'][curr]['name']) in output_dict:
-                output_dict[unidecode(movie['cast'][curr]['name'])][2] = output_dict[unidecode(movie['cast'][curr]['name'])][2] + ' & ' +  movie_details(movie_orig)['original_title']
-                output_dict[unidecode(movie['cast'][curr]['name'])][3] = output_dict[unidecode(movie['cast'][curr]['name'])][3] + 1
+            curr_name = unidecode(movie['cast'][curr]['name'])
+            cast_id = movie['cast'][curr]['id']
+            movie_name = movie_details(movie_orig)['original_title']
+            if curr_name in output_dict:
+                output_dict[curr_name][2].append(movie_name)
             else:
-                output_dict[unidecode(movie['cast'][curr]['name'])] = [unidecode(movie['cast'][curr]['name']), str(movie['cast'][curr]['id']), movie_details(movie_orig)['original_title'], 1]
+                output_dict[curr_name] = [curr_name, cast_id, [movie_name]]
 
-    with open(MY_DIR + '/' + 'actors_output.csv', 'w') as f:
+    with open(filename, 'w') as f:
         f.write('Actor Name, Actor Id, Movie Name')
         for key in output_dict:
-            if output_dict[key][3] >= 2:
+            if len(output_dict[key][2]) > 1:
                 f.write('\n')
-                f.write(f'{output_dict[key][0]}, {output_dict[key][1]}, {output_dict[key][2]}')
+                f.write(f'{output_dict[key][0]}, {output_dict[key][1]}, ')
+                for i in output_dict[key][2]:
+                    f.write(f'{i}')
+                    counter += 1
+                    if counter < len(output_dict[key][2]) and counter > 0:
+                        f.write(" & ")
+                counter = 0
 
 
-output_actors()
+
+
+filename = MY_DIR + '/' + 'actors_output.csv'
+output_actors(filename)
